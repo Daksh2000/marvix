@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Wikipedia Search</h1>
+<form method="get" action=".">
+    <input type="text" name="query" placeholder="Enter search term" value="{{ query }}">
+    <button type="submit">Search</button>
+</form>
+
+{% if results %}
+    <ul>
+        {% for result in results %}
+            <li>
+                <h3>{{ result.title }}</h3>
+                <p>{{ result.snippet|safe }}</p>
+                <a href="{% url 'save_article' result.title result.snippet result.url %}">Save Article</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}
